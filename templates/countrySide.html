@@ -1,0 +1,44 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}
+Top Earners {{ id }}
+{% endblock %}
+
+
+{% block content %}
+<div class="box-country">
+    <table class="table">
+        <thead>
+            <th>
+                Customer Id   
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+            Last Name
+            </th>
+            <th>
+            Country
+            </th>
+
+            <th>
+            Account Balance
+            </th>
+        </thead>
+        <tbody>
+            {%  for topEarner, balance in sortedList %}
+            <tr>
+                <td> {{ topEarner.Id }}</td>
+                <td> {{ topEarner.GivenName}} </td>            
+                <td> {{ topEarner.Surname }} </td>
+                <td> {{ topEarner.Country }} </td>
+                <td> {{ balance }} </td>     
+            </tr>
+            {%  endfor  %}
+
+        </tbody>
+
+    </table>
+</div>
+{% endblock %}

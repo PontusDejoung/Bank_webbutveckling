@@ -1,0 +1,85 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}New Customer{% endblock %}
+
+{% block content %}
+
+<div class="contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="titlepage text_align_center">
+                    <h2>Sign Up New Customer</h2>
+                </div>
+            </div>
+            <div class=" col-md-10 offset-md-1">
+                <form id="request" class="main_form" method="post">
+                    {{ theForm.csrf_token }}
+                    <div class="row">
+                        <div class="col-md-6 ">
+                            <p>First Name</p>
+                            {{ theForm.firstName(placeholder="Enter First Name") }}
+                        </div>
+                        <div class="col-md-6">
+                            <p>Last Name</p>
+                            {{ theForm.lastName(placeholder="Enter Last Name") }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>Birth Date</p>
+                            {{ theForm.birthDate() }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>National Id</p>
+                            {{ theForm.nationalId(placeholder="yyyymmdd****") }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>Email</p>
+                            {{ theForm.email(placeholder="Enter Email") }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>Telephone Number</p>
+                            {{ theForm.telephoneNr(placeholder="Enter Phone Number") }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>Adress</p>
+                            {{ theForm.adress(placeholder="Enter Adress") }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>Zipcode</p>
+                            {{ theForm.zipcode(placeholder="Enter Zipcode") }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>City of residens</p>
+                            {{ theForm.city(placeholder="Enter City") }} 
+                        </div>
+                        <div class="col-md-6">
+                            <p>Country</p>
+                            {{ theForm.country() }}
+                        </div>
+                        <div class="col-md-6">
+                            <p>Country Code
+                            {{ theForm.countryCode() }}</p> 
+                        </div>
+                        <div class="col-md-6">
+                            <p>Telephone Country Code</p>
+                            {{ theForm.telephoneCountryCode() }} 
+                        </div>
+                        {% for field, errors in theForm.errors.items() %}
+                        {{ theForm[field].label }}: {{ ', '.join(errors) }}
+                        </br>
+                        {% endfor %}
+                        <div class="col-md-12">
+                            <button class="send_btn" type="submit">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}    

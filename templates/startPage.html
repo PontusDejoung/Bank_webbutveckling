@@ -1,0 +1,51 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}Startpage{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+{% endwith %}
+<div class="container-1">
+    <form action="{{ url_for('startPage')}}" method="post" class="search-bar">
+            <input type="text" name="customerId" min="1" id="customerId" class="form_control"
+            placeholder="Search for Customer with Id" aria-label="Customer Id" aria-describedby="basic-addon2">
+                <button type="submit" value="Search for customer with Id">
+                <i class="bx bx-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="box-country">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Country</th><br>
+                <th>Number of Customers</th><br>
+                <th>Total Accounts</th><br>
+                <th>Total Amount</th><br>
+            </tr>
+        </thead>
+        <tbody>
+            {% for country, money in resultCustomerQuery %}
+            <tr>
+                <td><a href="{{ url_for('countryside', id= country[0] )}}" style="color:#a4a7ae;">{{ country[0]  }}</a></td>
+                <td> {{ country[1] }} </td>
+                <td> {{ money[0] }} </td>
+                <td> {{ money[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+{% endblock %}

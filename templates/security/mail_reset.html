@@ -1,0 +1,11 @@
+{% extends "baseTemplate.html"%}
+
+{% block content %}
+<p> We have recieved a request to reset your password</p>
+<br>
+<p>To reset your password please click on this link <br>
+pontuspython.azurewebsites.net/forgotenpassword/{{ userid }}/{{ code }}
+</p>
+</html>
+
+{% endblock %}

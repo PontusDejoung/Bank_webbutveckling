@@ -1,0 +1,53 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}
+Edit User
+{% endblock %}
+
+{% block content %}
+    {% for field, errors in form.errors.items() %}
+    {{ form[field].label }}: {{ ', '.join(errors) }}
+    <br>
+    {% endfor %}
+    <div class="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage text_align_center">
+                        <h2>Edit User Role</h2>
+                    </div>
+                </div>
+                <div class=" col-md-10 offset-md-1">
+                    <form id="request" class="main_form" method="post">
+                        <div class="row" style="justify-content: center;">
+                            <div class="col-md-6 ">
+                                <p>Role</p>
+                               {{ form.role(placeholder="Change Role") }} 
+                               {{ form.csrf_token }}
+                               {% with messages = get_flashed_messages(with_categories=true) %}
+                               {% if messages %}
+                               <ul class=flashes>
+                               {% for category, message in messages %}
+                                 <li class="{{ category }}">{{ message }}</li>
+                               {% endfor %}
+                               {% endif %}
+                               {% endwith %}
+                               </ul>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="send_btn" type="submit" style="margin-top:179px !important;">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+   
+{% endblock %}    

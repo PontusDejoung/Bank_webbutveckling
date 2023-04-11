@@ -1,0 +1,133 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}
+Kundsida
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static',filename='css/customerinfo.css')}}">
+<div id="about" class="about">
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="about_border">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="titlepage text_align_left">
+                            <h2 style="right: -19%;">Account</h2>
+                        </div>
+                        <div class="about_text">
+                                <table class="table-2" style="width: 100%;">
+                                    <thead style="font-size: 17px; color: #fff;">
+                                        <tr>
+                                            <th>AccountNr</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="font-size: 17px; color: #fff;">
+                                            <td>{{ account.Id }}</td>
+                                            <td> {{ account.Balance }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="about_img">
+                                 <figure>
+                                    <img class="img_responsive" src="/static/images/about2.png" alt="#">
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-country">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Operation</th>
+                <th>Amount</th>
+                <th>Account Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transactions in transaction %}
+            <tr> 
+                <th scope="row">{{ transactions.Id }} </th>
+                <td>{{ transactions.Date }} </td>
+                <td>{{ transactions.Type }}</td>
+                <td>{{ transactions.Operation }}</td>
+                <td>{{ transactions.Amount }}</td>
+                <td>{{ transactions.AccountId }}</td>
+            </tr>
+            {% endfor %}
+            <div class="withdraw-deposit">
+                <a style="color: #fff;" href="{{ url_for('transaction', id=account.Id) }}">
+                <i class='bx bx-transfer'></i>
+                Withdraw Or Deposit</a>
+                <a style="color: #fff;" href="{{ url_for('transfer', id=account.Id )}}"> 
+                <i class="bx bx-transfer"></i>
+                Transfer</a>
+            </div>
+            <tfoot>
+                <tr>
+                    <td>
+                        <div class="btn btn-outline-dark" id="transaction">
+                            <a style="color: #fff;" id="moreTrans" class="btn-outline-dark" href="javascript:fetchMoreTransactions();">Show more</a>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+pageNR = 2;
+hasNext = true;
+
+
+function fetchMoreTransactions(){
+    url = "/api/{{ account.Id }}/transaction?page=" + pageNR;
+    fetch(url)
+        .then((response)=>response.json())
+        .then((json)=>{
+            hasNext = json[1]
+            console.log(hasNext)
+            pageNR = pageNR + 1;
+            json[0].forEach(tableElement);
+            if (hasNext == false){
+                document.getElementById("moreTrans").style.visibility = "hidden";
+                document.getElementById("transaction").innerHTML = 'No more transactions to show';
+            }
+        });
+}
+
+function tableElement(element) {
+    document.querySelector('.table tbody').innerHTML +=
+        `<tr>
+            <th scope="row">${element.Id}</th>
+            <td>${element.Date}</td>
+            <td>${element.Type}</td>
+            <td>${element.Operation}</td>
+            <td>${element.Amount}</td>
+            <td>${element.AccountId}</td>
+                
+        </tr>`;
+        }
+</script>
+<script>
+
+</script>
+
+{% endblock %}    

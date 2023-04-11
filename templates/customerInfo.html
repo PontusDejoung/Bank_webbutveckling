@@ -1,0 +1,117 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}
+Kundsida {{ customer.Surname }}, {{ customer.GivenName }}
+{% endblock %}
+
+
+{% block content %}
+<div class="testimonial" style="height: 800px;">
+    <div class="container-fluid" style="height: 998px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="border_testi">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="titlepage text_align_center">
+                                <h2>Customer {{ customer.Surname }},{{ customer.GivenName }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row d_flex">
+                        <div class="col-md-10 offset-md-1">
+                            <div id="testimo" class="carousel slide our_testimonial" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#testimo" data-slide-to="0" class="active"></li>
+                                    <li data-target="#testimo" data-slide-to="1"></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <div class="container">
+                                            <div class="carousel-caption posi_in">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                        <!-- <div class="testomoniam_text text_align_left"> -->
+                                                            <div class="box-country">
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Adress</th>
+                                                                        <th>City</th>
+                                                                        <th>Zip</th>
+                                                                        <th>Country</th>
+                                                                        <th>National ID</th>
+                                                                        <th>Telephone Nr</th>
+                                                                        <th>Email</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>{{ customer.Surname }}, {{ customer.GivenName }}</td>
+                                                                        <td>{{ customer.Streetaddress }}</td>
+                                                                        <td>{{ customer.City }}</td>
+                                                                        <td>{{ customer.Zipcode }}</td>
+                                                                        <td>{{ customer.Country }}</td>
+                                                                        <td>{{ customer.NationalId }} </td>
+                                                                        <td>{{ customer.Telephone }}</td>
+                                                                        <td>{{ customer.EmailAddress }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <div class="container">
+                                            <div class="carousel-caption posi_in">
+                                                <div class="row">
+                                                    <div class="col-md-9">
+                                                            <div class="box-country" margin-left: 14.333333%;>
+                                                            <table class="table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Account Nr</th>
+                                                                        <th>Account Type</th>
+                                                                        <th>Created</th>
+                                                                        <th>Balance</th>
+                                                                        <th>Total Balance</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        {% for accountNr in specifiedAccounts %}
+                                                                        <td> <a href="{{ url_for('account', id=accountNr.Id) }}"style="color: #fff;"> {{ accountNr.Id }} </a></td>
+                                                                        <td>{{ accountNr.AccountType}}</td>
+                                                                        <td>{{ accountNr.Created }}</td>
+                                                                        <td>{{ accountNr.Balance }}</td>
+                                                                        <td id="position-Total">{{ totalBalance }}</td>
+                                                                    </tr>
+                                                                    {% endfor %}
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+   
+    
+{% endblock %}    

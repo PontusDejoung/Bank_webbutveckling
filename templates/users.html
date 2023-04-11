@@ -1,0 +1,63 @@
+{% extends "baseTemplate.html" %}
+
+{% block title %}All Customers{% endblock %}
+
+
+{% block content %}
+<div class="container-1">
+    <form method="get" class="search-bar">
+        <input type="text" placeholder="Search for customer" name="q" value="{{ q }}">
+        <button type="submit" value="Search"><i class="bx bx-search"></i></button>
+       
+    </form>
+</div>
+
+
+
+
+
+Du är på sidan {{ page }} av totalt {{ pages }}
+<div class="box-country">
+    <table class="table">
+        <thead>
+            <th>Email
+                <a href="/users?sortColumn=email&sortOrder=asc&q={{ q }}">
+                    <i class='bx bxs-up-arrow-alt'></i> 
+                </a>
+                <a href="/users?sortColumn=email&sortOrder=desc&q={{ q }}">
+                    <i class='bx bxs-down-arrow-alt'></i>
+                </a>
+            </th>
+        </thead>
+        <tbody>
+            {%  for user in listofUsers %}
+            <tr>
+                <td> {{ user.email }} </td>         
+                <td>
+                    <a  href="{{ url_for('addRole', id=user.id)}}" class="btn btn-outline-dark" style="color: grey;">Add Role</a>
+                </td>
+            </tr>
+            {% endfor %}
+                
+            <tfoot>
+                <tr>
+                    <td>
+                    {% if has_prev %}
+                    <a class="send_btn" type="submit" href="/users?page={{ page - 1 }}&sortColumn={{ sortColumn }}&sortOrder={{ sortOrder }}&q={{ q }}">Prev
+                    </a>
+                    {% endif %}
+                    </td>
+                    <td>
+                    {% if has_next %}
+                    <a class="send_btn" type="submit" href="/users?page={{ page + 1 }}&sortColumn={{ sortColumn }}&sortOrder={{ sortOrder }}&q={{ q }}">Next
+                    </a>
+                   
+                    {% endif %}
+                    </td>
+                </tr>
+            </tfoot>
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
