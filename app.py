@@ -20,7 +20,8 @@ app.config.from_object('config.ConfigDebug')
 db.app = app
 db.init_app(app)
 migrate = Migrate(app,db)
-app.security = Security(app, user_datastore)
+#Need this when ddeployed to azure
+#app.security = Security(app, user_datastore)
 mail = Mail(app)
 
 
@@ -424,10 +425,9 @@ def resetpassword():
             user_datastore.commit()
         if validation and form.validate_on_submit():
             flash(f"Reset instructions will be sent to {form.email.data}")
-            #!!Har använt mina fria antal mail i mailtrapen så den kraschar om jag inte kommenterar bort det
-            # msg = Message('Reset Password', sender='fakebank@testbanken.se',recipients=[f'{form.email.data}'])
-            # msg.body = render_template("/security/mail_reset.html",code=code,user=user)
-            # mail.send(msg)
+            msg = Message('Reset Password', sender='fakebank@testbanken.se',recipients=[f'{form.email.data}'])
+            msg.body = render_template("/security/mail_reset.html",code=code,userid=finduser.id)
+            mail.send(msg)
             return redirect(url_for('resetpassword'))
     return render_template("/security/forgot_password.html", form=form)
 

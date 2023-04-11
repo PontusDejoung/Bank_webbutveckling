@@ -8,6 +8,7 @@ from datetime import timedelta
 
 db = SQLAlchemy()
 
+
 fsqla.FsModels.set_db_info(db)
 
 class Role(db.Model, fsqla.FsRoleMixin):
@@ -59,7 +60,7 @@ class Transaction(db.Model):
 
 def seedData1(db):
     antal =  Customer.query.count()
-    while antal < 500:
+    while antal < 100:
         customer = Customer()
         
         customer.GivenName, customer.Surname = barnum.create_name()
@@ -138,6 +139,7 @@ def seedData1(db):
         
         antal = antal + 1
 def seedData2(app,db):
+    Security(app, user_datastore)
     app.security.datastore.db.create_all()
     if not app.security.datastore.find_role("Admin"):
         app.security.datastore.create_role(name="Admin")

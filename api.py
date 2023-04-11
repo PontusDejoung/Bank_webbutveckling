@@ -2,6 +2,7 @@ from flask import Blueprint,jsonify,request
 from datetime import datetime
 from model import Transaction, Account,Customer
 
+
 api = Blueprint('api', __name__)
 
 class CustomerApi:
@@ -84,7 +85,6 @@ def getCustomer(id):
 def getTransactions(id):
     transaction = Transaction.query.filter(Transaction.AccountId == id).order_by(Transaction.Date.desc())
     return transaction
-
 
 
 @api.route("/api/customer/<id>")
