@@ -12,18 +12,17 @@ from datetime import datetime,timedelta
 import os
 from flask_security import auth_required, hash_password
 from flask_mail import Mail,Message
+import flask_security
 
 
 
 app = Flask(__name__)
 app.config.from_object('config.ConfigDebug')
+app.security = Security(app, user_datastore)
 db.app = app
 db.init_app(app)
 migrate = Migrate(app,db)
-#Need this when ddeployed to azure
-#app.security = Security(app, user_datastore)
 mail = Mail(app)
-
 
 
 app.register_blueprint(api, url_prefix="/")

@@ -139,14 +139,13 @@ def seedData1(db):
         
         antal = antal + 1
 def seedData2(app,db):
-    Security(app, user_datastore)
     app.security.datastore.db.create_all()
     if not app.security.datastore.find_role("Admin"):
         app.security.datastore.create_role(name="Admin")
     if not app.security.datastore.find_role("Cashier"):
         app.security.datastore.create_role(name="Cashier")
-    if not app.security.datastore.find_user(email="stefan.holmberg@systementor.se"):
-        app.security.datastore.create_user(email="stefan.holmberg@systementor.se", password=hash_password("Hejsan123#"),roles=["Admin"])
-    if not app.security.datastore.find_user(email="stefan.holmberg@nackademin.se"):
-        app.security.datastore.create_user(email="stefan.holmberg@nackademin.se", password=hash_password("Hejsan123#"),roles=["Cashier"])
+    if not app.security.datastore.find_user(email=""):
+        app.security.datastore.create_user(email="", password=hash_password(""),roles=[""])
+    if not app.security.datastore.find_user(email=""):
+        app.security.datastore.create_user(email="", password=hash_password(""),roles=[""])
     app.security.datastore.db.session.commit()
