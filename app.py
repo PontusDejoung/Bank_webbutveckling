@@ -3,16 +3,14 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import functions
 from flask_migrate import Migrate, upgrade
 import operator
-from sqlalchemy import func
 from model import db, seedData1,seedData2,Customer,Account,Transaction, user_datastore,User
 from forms import DepositOrWithdraw, NewCustomer, TransferForm, NewUserForm,editUser, ForgotForm,ResetPasswordForm
 from api import api
 from flask_security import Security,roles_accepted, auth_required, logout_user
-from datetime import datetime,timedelta
+from datetime import datetime
 import os
 from flask_security import auth_required, hash_password
 from flask_mail import Mail,Message
-import flask_security
 
 
 
